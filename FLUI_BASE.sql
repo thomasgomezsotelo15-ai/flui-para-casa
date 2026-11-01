@@ -334,7 +334,7 @@ FROM usuario u
 FULL JOIN negocio n ON u.id_usuario = n.id_usuario
 
 
-SELECT
+SELECT 
 u.nombre,
 n.direccion
 FROM usuario u LEFT JOIN negocio n ON u.id_usuario = n.id_usuario
@@ -371,6 +371,49 @@ WHEN id_venta = 8 THEN 30
 WHEN id_venta = 9 THEN 50
 WHEN id_venta = 10 THEN 35
 END;
+
+SELECT * FROM venta;
+
+INSERT INTO venta (id_venta, id_negocio, id_cliente, fecha, total_venta, metodo_pago, productos_vendidos)
+VALUES (11, 105, 16, '2025-10-10 08:30:00', 45000, 'Efectivo', 5);
+
+
+ALTER TABLE venta_del_producto
+DROP CONSTRAINT venta_del_producto_pkey;
+
+ALTER TABLE venta_del_producto
+ADD CONSTRAINT pk_venta_producto
+PRIMARY KEY (id_venta, id_producto);
+
+ALTER TABLE producto_con_cliente
+DROP CONSTRAINT producto_con_cliente_pkey;
+
+ALTER TABLE producto_con_cliente
+ADD CONSTRAINT pk_producto_cliente
+PRIMARY KEY (id_producto, id_cliente);
+
+ALTER TABLE surtir_el_producto
+DROP CONSTRAINT surtir_el_producto_pkey;
+
+ALTER TABLE surtir_el_producto
+ADD CONSTRAINT pk_producto_proveedor
+PRIMARY KEY (id_producto, id_proveedor);
+
+SELECT * FROM proveedor;
+
+ALTER TABLE compra
+RENAME COLUMN Id_proovedor TO Id_proveedor;
+
+ALTER TABLE surtir_el_producto
+RENAME COLUMN Id_proovedor To Id_proveedor;
+
+SELECT * FROM compra;
+
+
+
+
+
+
 
 
 
