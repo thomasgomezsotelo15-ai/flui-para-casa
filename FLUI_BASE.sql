@@ -307,6 +307,75 @@ INSERT INTO Surtir_el_producto (Id_Producto, Id_Proovedor) VALUES
 (1009, 9),
 (1010, 10);
 
+SELECT 
+p.precio_venta,
+p.unidad_medida,
+v.fecha,
+v.total_venta,
+v.metodo_pago
+FROM venta v
+INNER JOIN venta_del_producto vdp ON v.id_venta = vdp.id_venta
+INNER JOIN producto p ON  p.id_producto = vdp.id_producto;
+
+
+SELECT 
+p.precio_venta,
+p.stock_minimo,
+pr.nombre,
+pr.direccion
+FROM producto p
+INNER JOIN surtir_el_producto sep ON p.id_producto = sep.id_producto
+INNER JOIN proovedor pr ON pr.id_proovedor = sep.id_proovedor;
+
+SELECT
+u.nombre,
+n.direccion
+FROM usuario u
+FULL JOIN negocio n ON u.id_usuario = n.id_usuario
+
+
+SELECT
+u.nombre,
+n.direccion
+FROM usuario u LEFT JOIN negocio n ON u.id_usuario = n.id_usuario
+
+
+ALTER TABLE proovedor
+RENAME COLUMN id_proovedor TO id_proveedor;
+
+ALTER TABLE proovedor
+RENAME TO Proveedor;
+
+SELECT * FROM proveedor;
+
+ALTER TABLE venta
+ADD COLUMN producto_vendidos INT;
+
+SELECT * FROM inventario;
+
+select * from venta;
+
+Alter table venta
+RENAME COLUMN producto_vendidos TO productos_vendidos;
+
+UPDATE venta
+SET productos_vendidos = CASE
+WHEN id_venta = 1 THEN 70
+WHEN id_venta = 2 THEN 246
+WHEN id_venta = 3 THEN 50
+WHEN id_venta = 4 THEN 98
+WHEN id_venta = 5 THEN 30
+WHEN id_venta = 6 THEN 20
+WHEN id_venta = 7 THEN 40
+WHEN id_venta = 8 THEN 30
+WHEN id_venta = 9 THEN 50
+WHEN id_venta = 10 THEN 35
+END;
+
+
+
+
+
 
 
 
